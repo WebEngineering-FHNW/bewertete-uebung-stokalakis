@@ -16,6 +16,9 @@ The account which acts as the master, needs an active Spotify account. The maste
 The clients are allowed to connect to the master account and are able to search for music titles and add them to playlist ("Queue").
 The master always has the full control over the playlist(s) ("Queues") and is able to add, remove and modify active clients and music titles. A nice to have feature is a poll functionality to allow the clients to vote for certain music titles, genres, singers.
 
+### Future
+The bigger idea behind this is to be able to use a MusiQueue account for several streaming services (youtube, apple music etc) - and not being bound to Spotify.
+
 ### In scope for webeC
 1.  Master & client UI
 2.  Master/client: Ability to search songs via Spotify Web API on master
