@@ -4,29 +4,31 @@
 
 Matrikel Number: 10-272-888
 
-Project idea short description: [Dies ist eine Idee die ich schon seit längerer Zeit habe, ich passe sie hier den Rahmenbedingungen für das Modul an.]
+Project idea short description: The MusQueue App
+[This idea came up to my mind several months ago - I've adapted the scope to meet the webeC project requirements (instead of a smartphone app, I will develop a web app).]
 
-### Problemstellung
-Ich bin eingeladen bei Freunden. Jeder möchte sein Handy am UE BOOM anschliessen um seine  Musik den anderen vorzustellen. Jedes Mal das Master-Gerät zu ändern, das mit dem UE Boom connected ist, ist aber mühsam und zeitaufwändig.
+### Problem
+Partying with friends. All the boys want to connect to the UE BOOM to play their cool music. Switching beetwen the different devices which are connected to the UE BOOM is painful and time-consuming.
 
-### Lösung
-Ich programmiere eine Web-App [Eigentlich wäre eine Smartphone App angedacht gewesen], die es einem erlaubt, Lieder in eine Queue zu schicken. Konkret soll dies so funktionieren: Ein Master-Gerät startet die Web-App und logged sich ein. Weitere User können die Web-App ebenfalls starten und auf das Profil des Masters verbinden. Der Master hat einen Spotify-Account und stellt das Musik-Such-Interface seinen Clients zur Verfügung. Die Clients können die Musik-Library des Masters durchsuchen und gewünschte Lieder in die Queue schicken. Der Master hat die Kontrolle über die Queue und Client-List und kann Lieder löschen, verschieben, hinzufügen, das Streaming beenden, pausieren oder starten und Clients löschen, pausieren oder einladen. Der Master kann auch eine Umfrage starten um über Lieder abstimmen zu lassen. Der Master ist der einzige der mit dem Ausgabe-Gerät verbunden ist.
+### Solution
+I want to program a web app which allows me, sending music titles into a queue. A master device (laptop, pc, ipad) starts the web app and logs into it's MusQueue account. Other users also start the app and log-in into their MusQueue accounts.
+The account which acts as the master, needs an active Spotify account. The master is able to create and modify playlists via the Spotify web API. The playlist itself stays with Spotify. The master device is the only device which is connected with the audio device (eg. UE BOOM).
+The clients are allowed to connect to the master account and are able to search for music titles and add them to playlist ("Queue").
+The master always has the full control over the playlist(s) ("Queues") and is able to add, remove and modify active clients and music titles. A nice to have feature is a poll functionality to allow the clients to vote for certain music titles, genres, singers.
 
-### In Scope für WebeC
-1.  Master UI für das Verwalten von Queues
-    1a. Umfrage starten
-2. Client UI für das Suchen und hinzufügen von Liedern
-    2a. An Umfrage teilnehmen
-3. API Anbindung für Spotify
-4. 
+### In scope for webeC
+1.  Master & client UI
+2.  Ability to create playlists via Spotify web API
+3.  Ability to play the playlist and let the clients actively adding titles
+4.  Optional: Poll initiation
 
-### Out of Scope
-1.  Master Connection zu Bluetooth Gerät
-
+### Out of scope
+1.  Group management
+2.  Login mask
 
 ## Project confirmation
 
-< to be filled by lecturer>
+< to be filled by lecturer >
 
 
 ## Project delivery <to be filled by student>
