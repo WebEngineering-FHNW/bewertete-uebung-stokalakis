@@ -11,10 +11,12 @@ Project idea short description: The MusiQ App
 Partying with friends. All the boys want to connect to the UE BOOM to play their cool music. Switching beetwen different devices to connect to the UE BOOM is painful and time-consuming.
 
 ### Solution
-I want to program a web app which allows me, sending music titles into a queue. A master device (laptop, pc, ipad) starts the web app and logs into it's MusiQ account. Other users also start the app and log-in into their MusiQ accounts.
-The account which acts as the master, needs an active Spotify account. The master is able to create and modify playlists via the Spotify Web API. The playlist itself stays with Spotify. The master device is the only device which is connected with the audio device (eg. UE BOOM).
-The clients are allowed to connect to the master account and are able to search for music titles and add them to playlist ("Queue").
-The master always has the full control over the playlist(s) ("Queues") and is able to add, remove and modify active clients and music titles. A nice to have feature is a poll functionality to allow the clients to vote for certain music titles, genres, singers.
+I want to program a web app which allows me, sending music titles into a queue.<br>
+A webserver acts as the connector between different devices, usergroups manage the access rights. The webserver needs an active Spotify account.<br>
+A device (Laptop, PC, iPad) starts the web app and logs into it's MusiQ account. This account acts as the master. Other users also start the app and log-in into their MusiQ accounts. The master account is able to create and modify playlists via the Spotify Web API. The playlist itself stays with Spotify. The master device is the only device which is connected with the audio device (eg. UE BOOM).<br>
+A client-usergroup is assigned to a master-account and connects to the webserver. The client-usergroup is able to search for music titles and add them to a playlist ("Queue").<br>
+The master account always has the full control over the playlist(s) ("Queues") and is able to add, remove and modify active clients and music titles.<br>
+A nice to have feature is a poll functionality to allow the clients to vote for certain music titles, genres, singers.
 
 ### Future
 The bigger idea behind this is to be able to use a MusiQ account for several streaming services (youtube, apple music etc) - and not being bound to Spotify; or even stream your own local stored music to a master device, whereat an internet connection is not needed at all (master device acts then as a server).
