@@ -32,8 +32,11 @@ The bigger idea behind this is to be able to use a MusiQueue account for several
 
 ## Project confirmation
 
-< to be filled by lecturer >
-
+Confirmed, D.König.
+Cool idea! 
+It is a comparatively ambitious project.
+Make sure you start with the simple parts such that you have something to show
+even if the more difficult parts take longer than expected.
 
 ## Project delivery <to be filled by student>
 
