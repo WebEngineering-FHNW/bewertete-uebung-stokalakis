@@ -19,12 +19,12 @@ The master account always has the full control over the playlist(s) ("Queues") a
 A nice to have feature is a poll functionality to allow the clients to vote for certain music titles, genres, singers.
 
 ### Future
-The bigger idea behind this is to be able to use a MusiQ account for several streaming services (youtube, apple music etc) - and not being bound to Spotify; or even stream your own local stored music to a master device, whereat an internet connection is not needed at all (master device acts then as a server).
+The bigger idea behind this is to be able to use a MusiQ account for several streaming services (Youtube, Apple Music etc) - and not being bound to Spotify; or even stream your own local stored music to a master device, whereat an internet connection is not needed at all (master device itself acts then as a webserver).
 
 ### In scope for webeC
 1.  Master & client UI
-2.  Master/client: Ability to search songs via Spotify Web API on master
-3.  Master/client: Ability to create playlists, stored on server via master
+2.  Master: Ability to create playlists, stored on server
+3.  Master/client: Ability to search songs via Spotify Web API
 4.  Master: Ability to play the playlist and let the clients actively adding titles
 5.  Optional: Poll initiation
 
