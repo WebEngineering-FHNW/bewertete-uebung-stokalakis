@@ -1,0 +1,6 @@
+Client ID
+4a5ac7cf14e5401eb23430dc40164849
+Client Secret
+5a54fd36fbfc4f33b2e6d1bdd2e74e27
+Redirect URIs
+Remove http://localhost:8080/callback
