@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: mvc
+        defaultPackage: musiq
     spring:
         transactionManagement:
             proxies: false

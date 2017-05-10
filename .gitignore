@@ -3,3 +3,5 @@
 .gradle/
 build/
 *.db
+.dropbox
+desktop.ini

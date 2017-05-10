@@ -39,7 +39,7 @@ goto pc
 :copy_l
 set srcfile_l=""
 set destfile_l=""
-rmdir ""
+rmdir "" /s /q
 xcopy /s "%srcfile_l%" "%destfile_l%"
 goto laptop
 
