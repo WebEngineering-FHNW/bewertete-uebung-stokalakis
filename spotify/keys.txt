@@ -4,3 +4,5 @@ Client Secret
 5a54fd36fbfc4f33b2e6d1bdd2e74e27
 Redirect URIs
 Remove http://localhost:8080/callback
+
+spotify:track:0It6VJoMAare1zdV2wxqZq

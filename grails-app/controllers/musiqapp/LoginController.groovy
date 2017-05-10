@@ -27,8 +27,15 @@ class LoginController {
 		    body(form)
 
         }
-		
-		render resp.json
+        
+        def token = resp.json.access_token
+        
+        def play = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
+            contentType("application/json")
+            json{ context_uri="spotify:user:sevi_l:playlist:69KzWRLGSV7foEEzDPYOGe" }
+        }
+        
+        render token + "<br/> " + play.json
 		
 	}
 
