@@ -5,3 +5,7 @@ build/
 *.db
 .dropbox
 desktop.ini
+bin/*
+.settings*
+.project
+.classpath

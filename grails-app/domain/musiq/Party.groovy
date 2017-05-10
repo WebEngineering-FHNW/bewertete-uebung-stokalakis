@@ -8,6 +8,8 @@ class Party {
     static hasMany = [songs : Song]
 
     static constraints = {
-        
+        name nullable: true
+        spotifyID nullable: true
+        songs nullable: true
     }
 }

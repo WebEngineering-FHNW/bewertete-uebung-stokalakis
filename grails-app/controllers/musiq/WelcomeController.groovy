@@ -1,10 +1,11 @@
-package mvc
+package musiq
 
-class BookingController {
+class WelcomeController {
 
-    static scaffold = Booking
+	def createParty() { 
+	}
 
-    def play() {
+    /*def play() {
         def allRooms = Room.list()
         Date today = new Date().clearTime()
         String lastSlot = "15:15-18:00"
@@ -27,6 +28,6 @@ class BookingController {
         def searchDay = Date.parse('yyyy-MM-dd', day)
         def bookedRooms = Booking.findAllByDayAndTimeSlot(searchDay, timeSlot).room
         render view:"availableRoomsFor", model: [rooms: (allRooms - bookedRooms)]
-    }
+    }*/
 
 }
