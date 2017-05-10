@@ -8,10 +8,12 @@ class SpotifyService {
 	RestBuilder rest = new RestBuilder()
 
 	def login(def code){
+	
 		
-		// EXTERNAL: http://stackoverflow.com/questions/21744236/grails-restbuilder-simple-post-example	
+		// O-AUTH 2
+		// (Part) EXTERNAL: http://stackoverflow.com/questions/21744236/grails-restbuilder-simple-post-example	
 		MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>()
-		form.add("grant_type", "authorization_code")
+		form.add("grant_type", "authoriaztion_code")
 		form.add("code", code)
 		form.add("redirect_uri", "http://localhost:8080/login/callback")
 		// EXTERNAL END
