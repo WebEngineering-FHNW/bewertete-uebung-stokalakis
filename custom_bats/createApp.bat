@@ -1,1 +1,0 @@
-grailsw create-app
