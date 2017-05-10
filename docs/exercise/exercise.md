@@ -18,7 +18,7 @@ A client-usergroup is assigned to a master-account and connects to the webserver
 The master account always has the full control over the playlist(s) ("Queues") and is able to add, remove and modify active clients and music titles.<br>
 A nice to have feature is a poll functionality to allow the clients to vote for certain music titles, genres, singers.
 
-## Update, 10.05.2017
+### Update, 10.05.2017
 New idea: User does not need an MusiQ account - it's enough to know the unique public ID of the playlist to add a song ("login screen": Name and ID)
 
 ### Future
