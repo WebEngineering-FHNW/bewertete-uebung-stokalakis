@@ -8,7 +8,6 @@ class SpotifyService {
 	RestBuilder rest = new RestBuilder()
 
 	def login(def code){
-	
 		
 		// O-AUTH 2
 		// (Part) EXTERNAL: http://stackoverflow.com/questions/21744236/grails-restbuilder-simple-post-example	
@@ -27,20 +26,48 @@ class SpotifyService {
         
         return resp.json
 	}
+	
+	// Defining Playlist services based on https://developer.spotify.com/web-api/endpoint-reference/
 
-	def play(def token, def playlist) {
+	def playPlaylist(def token, def playlist) {
         
-        def play = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
+        def playPlaylist = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
             contentType("application/json")
             json{ context_uri="spotify:user:sevi_l:playlist:" + playlist }
         }
         
-        return play.status
+        return playPlaylist.status
 		
 	}
 	
+	def deletePlaylist() { 
+		// See FAQ in https://developer.spotify.com/web-api/remove-tracks-playlist/ : Deletion not possible, but unfollowing
+	}
+	
+	def getUserPlaylists(def token, def userID) {
+			def getUserPlaylists = rest.get('https://api.spotify.com/v1/users/' + userID + '/playlists?access_token=' + token)
+			
+			return getUserPlaylists.json
+	}
+	
+	def getPlaylistSongs(def token, def userID, def playlistID) {
+		def getPlaylistSongs = rest.get('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token)
+		
+		return getPlaylistSongs.json
+	}
+	
+	// ToDo: Not finished yet
+	def reorderPlaylist(def token, def userID, def playlistID, def rangeStart, def insertBefore) {
+		def reorderPlaylist = rest.put('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) { 
+			contentType("application/json")
+			json{ }
+			//json{ context_uri="spotify:user:sevi_l:playlist:" + playlist }
+		}
+		
+		return reorderPlaylist.status
+	}
+	
 	def createPlaylist(def token, def playlistName, def user) {
-        
         def playlist = rest.post('https://api.spotify.com/v1/users/' + user + '/playlists?access_token=' + token) {
             contentType("application/json")
             body("{name : '" + playlistName + "', public : false, context_uri : 'spotify:user:" + user + ":playlist:" + playlist + "'}")
@@ -49,6 +76,8 @@ class SpotifyService {
         return playlist.json
 		
 	}
+	
+	// Defining Song (Track) services based on https://developer.spotify.com/web-api/endpoint-reference/
 	
 	def addSong(def token, def trackID, def playlistID, def userID) { 
 		def addSong = rest.post('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) {
@@ -62,9 +91,48 @@ class SpotifyService {
 	
 	}
 	
-	def getUser(def token) { 
+	// ToDo: Not sure if working :)
+	def deleteSong(def token, def userID, def playlistID, def trackID) {
+		def deleteSong = rest.delete('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) { 
+			contentType("application/json")
+			json{ 
+				["tracks": [{ "uri" = "spotify:track:" + trackID }]]
+			}
+		}
 		
+		return deleteSong.json
+	}
+	
+	def nextSong(def token) {
+		def nextSong = rest.post('https://api.spotify.com/v1/me/player/next?access_token=' + token) { 
+			contentType("application/json")
+		}
+		
+		return nextSong.status
+		
+	}
+	
+	def previousSong(def token) {
+		def previousSong = rest.post('https://api.spotify.com/v1/me/player/previous?access_token=' + token) {
+			contentType("application/json")
+		}
+		
+		return previousSong.status
+	}
+	
+	def pauseSong(def token) {
+		def pauseSong = rest.post('https://api.spotify.com/v1/me/player/pause?access_token=' + token) { 
+			contentType("application/json")
+		}
+		
+		return pauseSong.status
+	}
+	
+	// Defining User services
+	
+	def getUser(def token) {
 		def user = rest.get('https://api.spotify.com/v1/me?access_token=' + token)
+		
 		return user.json
 		
 	}
