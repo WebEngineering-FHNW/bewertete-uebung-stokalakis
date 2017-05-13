@@ -27,7 +27,7 @@ class SpotifyService {
         return resp.json
 	}
 	
-	// Defining Playlist services based on https://developer.spotify.com/web-api/endpoint-reference/
+	// Defining playlist services based on https://developer.spotify.com/web-api/endpoint-reference/
 
 	def playPlaylist(def token, def playlist) {
         
@@ -77,7 +77,7 @@ class SpotifyService {
 		
 	}
 	
-	// Defining Song (Track) services based on https://developer.spotify.com/web-api/endpoint-reference/
+	// Defining song (track) services based on https://developer.spotify.com/web-api/endpoint-reference/
 	
 	def addSong(def token, def trackID, def playlistID, def userID) { 
 		def addSong = rest.post('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) {
@@ -134,6 +134,28 @@ class SpotifyService {
 		def user = rest.get('https://api.spotify.com/v1/me?access_token=' + token)
 		
 		return user.json
+		
+	}
+	
+	// Defining search services
+	
+	def searchSong(def query, def type) {
+	
+		if (type == "album") {
+			def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=album')
+			
+			return searchSong.json
+		}
+		
+		if (type == "artist") {
+			def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=arist')
+			
+			return searchSong.json
+		}
+		
+		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=track')
+		
+		return searchSong.json
 		
 	}
 
