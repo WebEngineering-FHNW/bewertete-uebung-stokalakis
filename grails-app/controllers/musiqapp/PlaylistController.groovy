@@ -12,7 +12,7 @@ class PlaylistController {
 	def add() {
 	
 		def songID = params.song
-		def partyID = params.party
+		def partyID = params.long('party')
 		def playlistID = params.playlist
 		def party = Party.get(partyID)
 		def userID = spotifyService.getUser(party.token)
@@ -25,7 +25,16 @@ class PlaylistController {
 		
 	}
 	
-	def play() {
+	def create() {
+	
+		def name = params.namePlaylist
+		def partyID = params.partyID
+		def party = Party.get(partyID)
+		party.name = name
+		party.save()
+		
+		//render (view: "/welcome/playlist", model: [party:party])
+		render name
 		
 	}
 

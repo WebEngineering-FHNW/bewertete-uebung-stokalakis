@@ -12,7 +12,7 @@ class SpotifyService {
 		// O-AUTH 2
 		// (Part) EXTERNAL: http://stackoverflow.com/questions/21744236/grails-restbuilder-simple-post-example	
 		MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>()
-		form.add("grant_type", "authoriaztion_code")
+		form.add("grant_type", "authorization_code")
 		form.add("code", code)
 		form.add("redirect_uri", "http://localhost:8080/login/callback")
 		// EXTERNAL END
@@ -29,11 +29,11 @@ class SpotifyService {
 	
 	// Defining playlist services based on https://developer.spotify.com/web-api/endpoint-reference/
 
-	def playPlaylist(def token, def playlist) {
+	def playPlaylist(def token, def userID, def playlist) {
         
         def playPlaylist = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
             contentType("application/json")
-            json{ context_uri="spotify:user:sevi_l:playlist:" + playlist }
+            json{ context_uri="spotify:user:" + userID + ":playlist:" + playlist }
         }
         
         return playPlaylist.status
@@ -54,17 +54,6 @@ class SpotifyService {
 		def getPlaylistSongs = rest.get('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token)
 		
 		return getPlaylistSongs.json
-	}
-	
-	// ToDo: Not finished yet
-	def reorderPlaylist(def token, def userID, def playlistID, def rangeStart, def insertBefore) {
-		def reorderPlaylist = rest.put('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) { 
-			contentType("application/json")
-			json{ }
-			//json{ context_uri="spotify:user:sevi_l:playlist:" + playlist }
-		}
-		
-		return reorderPlaylist.status
 	}
 	
 	def createPlaylist(def token, def playlistName, def user) {
@@ -95,8 +84,8 @@ class SpotifyService {
 	def deleteSong(def token, def userID, def playlistID, def trackID) {
 		def deleteSong = rest.delete('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) { 
 			contentType("application/json")
-			json{ 
-				["tracks": [{ "uri" = "spotify:track:" + trackID }]]
+			json {
+				tracks = [{ uri = "spotify:track:" + trackID }]
 			}
 		}
 		
@@ -140,20 +129,8 @@ class SpotifyService {
 	// Defining search services
 	
 	def searchSong(def query, def type) {
-	
-		if (type == "album") {
-			def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=album')
-			
-			return searchSong.json
-		}
 		
-		if (type == "artist") {
-			def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=arist')
-			
-			return searchSong.json
-		}
-		
-		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=track')
+		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=' + type)
 		
 		return searchSong.json
 		

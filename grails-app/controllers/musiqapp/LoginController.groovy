@@ -16,9 +16,9 @@ class LoginController {
 		
 		def loginResult = spotifyService.login(code)
 		
-		Party party1 = new Party(name: "Party1", token: loginResult.access_token, refreshToken: loginResult.refresh_token).save(failOnError:true)
+		Party party = new Party(token: loginResult.access_token, refreshToken: loginResult.refresh_token).save(failOnError:true)
 		
-		render party1.id
+		render (view: "/welcome/create", model: [party:party])
 		
 	}
 	
