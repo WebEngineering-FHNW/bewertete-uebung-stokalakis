@@ -2,12 +2,13 @@ package musiqapp
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.LinkedMultiValueMap;
 import grails.plugins.rest.client.*
+import groovy.json.JsonBuilder
 
 class SpotifyService {
 
 	RestBuilder rest = new RestBuilder()
 
-	def login(def code){
+	def login(def code, def clientId, def clientSecret){
 		
 		// O-AUTH 2
 		// (Part) EXTERNAL: http://stackoverflow.com/questions/21744236/grails-restbuilder-simple-post-example	
@@ -18,7 +19,7 @@ class SpotifyService {
 		// EXTERNAL END
 
         def resp = rest.post('https://accounts.spotify.com/api/token') {
-            auth ('4a5ac7cf14e5401eb23430dc40164849', '5a54fd36fbfc4f33b2e6d1bdd2e74e27')
+            auth (clientId, clientSecret)
            	accept("application/json")
 		    contentType("application/x-www-form-urlencoded")
 		    body(form)
@@ -30,18 +31,20 @@ class SpotifyService {
 	// Defining playlist services based on https://developer.spotify.com/web-api/endpoint-reference/
 
 	def playPlaylist(def token, def userID, def playlist) {
-        
+		
         def playPlaylist = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
             contentType("application/json")
-            json{ context_uri="spotify:user:" + userID + ":playlist:" + playlist }
+            json{ context_uri = "spotify:user:" + userID + ":playlist:" + playlist }
         }
         
-        return playPlaylist.status
+        return playPlaylist.json
 		
 	}
 	
-	def deletePlaylist() { 
+	def deletePlaylist(def token, def userID, def playlistID) { 
 		// See FAQ in https://developer.spotify.com/web-api/remove-tracks-playlist/ : Deletion not possible, but unfollowing
+		def delete = rest.delete('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/followers?access_token=' + token)
+		return delete.status
 	}
 	
 	def getUserPlaylists(def token, def userID) {
@@ -59,7 +62,7 @@ class SpotifyService {
 	def createPlaylist(def token, def playlistName, def user) {
         def playlist = rest.post('https://api.spotify.com/v1/users/' + user + '/playlists?access_token=' + token) {
             contentType("application/json")
-            body("{name : '" + playlistName + "', public : false, context_uri : 'spotify:user:" + user + ":playlist:" + playlist + "'}")
+            body("{\"name\" : \"" + playlistName + "\", \"public\" : false}")
         }
         
         return playlist.json

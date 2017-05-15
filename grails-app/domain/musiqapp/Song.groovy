@@ -5,7 +5,7 @@ import grails.rest.Resource
 class Song {
     String name
     String songID
-    String user
+    User user
     Date dateAdded
 
     static belongsTo = [ party: Party ]

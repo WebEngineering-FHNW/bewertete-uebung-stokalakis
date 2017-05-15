@@ -1,28 +1,35 @@
 package musiqapp
-import org.springframework.util.MultiValueMap;
+
 import org.springframework.util.LinkedMultiValueMap;
 import grails.plugins.rest.client.*
 
 class LoginController {
 
 	def spotifyService
-
-	def index(){}
-
-	def callback() {
+	def randomGenerator = RandomGenerator.newInstance()
 	
+	def callback() {
+		
 		def code = params.code
 		def state = params.state
 		
-		def loginResult = spotifyService.login(code)
+		//generate the ids for the party
+		def publicID = randomGenerator.randomString(8)
+		def adminID = randomGenerator.randomString(8)
 		
-		Party party = new Party(token: loginResult.access_token, refreshToken: loginResult.refresh_token).save(failOnError:true)
+		if(params.state != session.id){
+			throw new Exception("session ids do not match")
+		}
 		
-		render (view: "/welcome/create", model: [party:party])
+		def loginResult = spotifyService.login(code,
+			grailsApplication.config.getProperty('app.spotify.client_id'),
+			grailsApplication.config.getProperty('app.spotify.client_secret'))
 		
-	}
-	
-	def play() {
+		Party party = new Party(token: loginResult.access_token, 
+			refreshToken: loginResult.refresh_token,
+			adminID: adminID, publicID: publicID).save(failOnError:true)
+		
+		render (view: "/login/create", model: [party:party])
 		
 	}
 

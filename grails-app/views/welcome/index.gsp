@@ -37,7 +37,8 @@
     <div class="container">
     	<div class="jumbotron">
 			<div class="input-group">
-				<a href="https://accounts.spotify.com/authorize/?client_id=4a5ac7cf14e5401eb23430dc40164849&response_type=code&redirect_uri=http://localhost:8080/login/callback&scope=user-read-email playlist-read-private playlist-modify-private user-read-playback-state user-modify-playback-state&state=34fFs29kd09" class="btn btn-info" role="button">New party</a>
+				<a href="${grailsApplication.config.app.spotify?.auth_url}?client_id=${grailsApplication.config.app.spotify?.client_id}&response_type=code&redirect_uri=${grailsApplication.config.app.spotify?.redirect_uri}&scope=${grailsApplication.config.app.spotify?.scope}&state=${session.id}" class="btn btn-info" role="button">New party</a>
+<%--				<a href="https://accounts.spotify.com/authorize/?client_id=4a5ac7cf14e5401eb23430dc40164849&response_type=code&redirect_uri=http://localhost:8080/login/callback&scope=user-read-email playlist-read-private playlist-modify-private user-read-playback-state user-modify-playback-state&state=34fFs29kd09" class="btn btn-info" role="button">New party</a>--%>
 			</div>
 			<br>
 			<form>
