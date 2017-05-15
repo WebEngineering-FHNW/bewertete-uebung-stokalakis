@@ -18,16 +18,23 @@ class PlaylistController {
 	def addSong() {
 	
 		def songID = params.song
-		def partyID = params.long('party')
-		def playlistID = params.playlist
-		def party = Party.get(partyID)
-		def userID = spotifyService.getUser(party.token)
+		def publicID = params.publicID
+		//def playlistID = params.playlist
+		def party = Party.findByPublicID(publicID)
+		def user = spotifyService.getUser(party.token)
 		
-		def added = spotifyService.addSong(party.token, songID, playlistID, userID.id) 
+		//TODO: add song to db (mit transaktion, nur wenn es bei der spotify liste auch geklappt hat)
 		
+		def added = spotifyService.addSong(party.token, songID, party.playlistID, user.id)
+		
+		//TODO: commit or rollback (if successful)
+		 
+		def play = spotifyService.playPlaylist(party.token, user.id, party.playlistID)
+		
+		log.info(added.toString())
+		log.info(play.toString())
 		render added
 		
-		// http://localhost:8080/playlist/add?song=0It6VJoMAare1zdV2wxqZq&party=1&playlist=3Oc39nCFp0ZCR2IjGKaBii
 	}
 	
 	//shows the playlist to the user
@@ -43,8 +50,8 @@ class PlaylistController {
 	
 	//shows the playlist to the admin
 	def admin() {
-		def publicID = params.id
-		def party = Party.findByAdminID(publicID)
+		def adminID = params.id
+		def party = Party.findByAdminID(adminID)
 		def user = spotifyService.getUser(party.token)
 		//TODO: move into add song handler
 		spotifyService.playPlaylist(party.token, user.id, '3ftHe2N8T3TGyukzmaa5K7')

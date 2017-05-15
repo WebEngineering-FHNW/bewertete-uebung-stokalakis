@@ -10,7 +10,7 @@ class SpotifyService {
 
 	def login(def code, def clientId, def clientSecret){
 		
-		// O-AUTH 2
+		// O-AUTH 2 https://developer.spotify.com/web-api/authorization-guide/
 		// (Part) EXTERNAL: http://stackoverflow.com/questions/21744236/grails-restbuilder-simple-post-example	
 		MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>()
 		form.add("grant_type", "authorization_code")
@@ -30,11 +30,11 @@ class SpotifyService {
 	
 	// Defining playlist services based on https://developer.spotify.com/web-api/endpoint-reference/
 
-	def playPlaylist(def token, def userID, def playlist) {
+	def playPlaylist(def token, def userID, def playlistID) {
 		
         def playPlaylist = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
             contentType("application/json")
-            json{ context_uri = "spotify:user:" + userID + ":playlist:" + playlist }
+            json{ context_uri = "spotify:user:" + userID + ":playlist:" + playlistID }
         }
         
         return playPlaylist.json
@@ -131,9 +131,9 @@ class SpotifyService {
 	
 	// Defining search services
 	
-	def searchSong(def query, def type) {
+	def searchSong(def query, def type, def limit) {
 		
-		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=' + type)
+		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=' + type + '&limit=' + limit)
 		
 		return searchSong.json
 		
