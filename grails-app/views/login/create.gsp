@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>MusiQ App - Share your music style!</title>
-
-<asset:stylesheet src="bootstrap.css" />
-<asset:stylesheet src="custom.css" />
-
-</head>
-
-<body>
-	<div class="container">
-		<div class="jumbotron">
-			<p>your party's public id is: ${party.publicID}</p>
-			<div class="input-group">
-				<form action="/playlist/create" method="post">
-					<input type="text" class="form-control" name="namePlaylist"
-						placeholder="Name your playlist" aria-describedby="basic-addon1">
-					<input type="hidden" name="adminID" value="${party.adminID}">
-					<button type="submit" class="btn btn-default">Create</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-	<asset:javascript src="bootstrap.js" />
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MusiQ App</title>
+    <asset:stylesheet src="bootstrap.css" />
+    <asset:stylesheet src="custom.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <!--<h1>Welcome to Musiq</h1>-->
+        <p>Your party's public ID is: ${party.publicID}</p>
+        <p class="lead">Enter your name and you are ready to go!</p>
+        <form action="/playlist/create" method="post">
+            <div class="input-group-lg">
+                <label for="partyID" class="sr-only">Name</label>
+                <input type="text" name="namePlaylist" class="form-control" placeholder="Name your playlist" required autofocus>
+                <input type="hidden" name="adminID" value="${party.adminID}">
+                <br/>
+                <button class="btn btn-lg btn-primary" type="submit">Go!</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
