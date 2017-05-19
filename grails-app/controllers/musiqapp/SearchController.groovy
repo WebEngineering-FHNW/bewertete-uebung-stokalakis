@@ -10,8 +10,13 @@ class SearchController {
 	def index(){
 		def search = params.search
 		log.info(search)
-		def publicID = params.publicID
-		def party = Party.findByPublicID(publicID)
+		def partyID = params.id
+		def party
+		if (partyID.startsWith("A")) {
+			party = Party.findByAdminID(partyID)
+		} else { 
+			party = Party.findByPublicID(partyID)
+		}
 		
 		def type = "track"
 		def limit = 50
@@ -21,7 +26,7 @@ class SearchController {
 			searchSong = spotifyService.searchSong(search, type, limit)
 		}
 
-		render(view: "index", model: [searchSong: searchSong, party: party])
+		render(view: "index", model: [searchSong: searchSong, party: party, id: partyID])
 	}
 
 }

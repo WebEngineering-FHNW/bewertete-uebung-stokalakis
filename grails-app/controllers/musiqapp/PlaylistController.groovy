@@ -8,55 +8,51 @@ class PlaylistController {
 	def spotifyService
 
 	def index(){}
-
-	def play() {
-	}	
-
-	def stop() {
-	}
-		
-	def addSong() {
 	
+	def addSong() {
 		def songID = params.song
-		def publicID = params.publicID
+		def partyID = params.id
 		//def playlistID = params.playlist
-		def party = Party.findByPublicID(publicID)
+		def admin = partyID.startsWith("A")
+		def party
+		if(admin) { 
+			party = Party.findByAdminID(partyID)
+		} else { 
+			party = Party.findByPublicID(partyID)
+		}
+		
 		def user = spotifyService.getUser(party.token)
+		def song = spotifyService.getSong(party.token, songID)
 		
-		//TODO: add song to db (mit transaktion, nur wenn es bei der spotify liste auch geklappt hat)
-		
-		def added = spotifyService.addSong(party.token, songID, party.playlistID, user.id)
-		
-		//TODO: commit or rollback (if successful)
-		 
-		def play = spotifyService.playPlaylist(party.token, user.id, party.playlistID)
+		//add song to db (with transaction --> both ways (db & spotify) have to be successful)
+		def added
+		Song.withTransaction { status ->
+			new Song(image: song.album.images[2].url, album: song.album.name, name: song.name, artist: song.artists[0].name, songID : songID, dateAdded: new Date(), party: party).save(failOnError:true)
+			added = spotifyService.addSong(party.token, songID, party.playlistID, user.id)
+			log.info(added.toString())
+			
+		}
 		
 		log.info(added.toString())
-		log.info(play.toString())
-		render added
+
+		redirect (action: "show", id: partyID)
 		
 	}
-	
-	//shows the playlist to the user
-	def user() {
-		def publicID = params.id
-		def party = Party.findByPublicID(publicID)
-		def user = spotifyService.getUser(party.token)
-		//TODO: move into add song handler
-		spotifyService.playPlaylist(party.token, user.id, '3ftHe2N8T3TGyukzmaa5K7')
 		
-		render params.id
-	}
-	
 	//shows the playlist to the admin
-	def admin() {
-		def adminID = params.id
-		def party = Party.findByAdminID(adminID)
+	def show() {
+		def partyID = params.id
+		def admin = partyID.startsWith("A")
+		def party
+		if(admin) { 
+			party = Party.findByAdminID(partyID)
+		} else { 
+			party = Party.findByPublicID(partyID)
+		}
+
 		def user = spotifyService.getUser(party.token)
-		//TODO: move into add song handler
-		spotifyService.playPlaylist(party.token, user.id, '3ftHe2N8T3TGyukzmaa5K7')
-		
-		render params.id
+			
+		render(view: "playlist", model: [admin: admin, party: party, user: user])
 	}
 	
 	def create() {
@@ -67,14 +63,30 @@ class PlaylistController {
 		
 		def user = spotifyService.getUser(party.token)
 		
-		def playlistID = spotifyService.createPlaylist(party.token, "mq_"+party.name, user.id).id
+		def playlistID = spotifyService.createPlaylist(party.token, "mq_" + party.name, user.id).id
 
 		party.playlistID = playlistID
 
 		party.save(flush: true, failOnError: true)
+		log.info ("created");
+		redirect (action: "show", id: adminID)
 		
-		redirect (action: "admin", params: [id: adminID])
+	}
+	
+	def join() { 
+		def partyID = params.partyID
+		log.info partyID
+		redirect (action: "show", id: partyID)
+	}
+	
+	def play() { 
+		def adminID = params.id
+		def party = Party.findByAdminID(adminID)
+		def user = spotifyService.getUser(party.token)
 		
+		spotifyService.playPlaylist(party.token, user.id, party.playlistID)
+		
+		redirect (action: "show", id: adminID)
 	}
 
 }
