@@ -19,4 +19,8 @@ class Party {
 		publicID unique: true
 		adminID unique: true
     }
+    
+    static mapping = {
+    	songs sort: 'dateAdded', order: 'asc'
+	}
 }
