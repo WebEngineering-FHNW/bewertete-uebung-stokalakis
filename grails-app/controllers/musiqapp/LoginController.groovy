@@ -14,8 +14,8 @@ class LoginController {
 		def state = params.state
 		
 		//generate the ids for the party
-		def publicID = randomGenerator.randomString(8)
-		def adminID = randomGenerator.randomString(8)
+		def publicID = "P" + randomGenerator.randomString(8)
+		def adminID = "A" + randomGenerator.randomString(8)
 		
 		if(params.state != session.id){
 			throw new Exception("session ids do not match")
@@ -29,7 +29,7 @@ class LoginController {
 			refreshToken: loginResult.refresh_token,
 			adminID: adminID, publicID: publicID).save(failOnError:true)
 		
-		render (view: "/login/create", model: [party:party])
+		render (view: "/login/create", model: [party: party])
 		
 	}
 
