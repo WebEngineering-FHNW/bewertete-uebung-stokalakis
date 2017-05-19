@@ -29,17 +29,43 @@ class SpotifyService {
 	}
 	
 	// Defining playlist services based on https://developer.spotify.com/web-api/endpoint-reference/
-
+	
 	def playPlaylist(def token, def userID, def playlistID) {
+		//get devices
+		def devices = rest.get('https://api.spotify.com/v1/me/player/devices?access_token=' + token) {
+			contentType("application/json")
+		}
 		
-        def playPlaylist = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
+		//get first device
+		if(devices.status == 200 && devices.json.devices.length() > 0){
+			def deviceId = devices.json.devices.id[0]
+			
+			//transfer the playback to the correct device
+			def transfer = rest.put('https://api.spotify.com/v1/me/player?access_token=' + token) {
+				contentType("application/json")
+				json {device_ids = [deviceId]
+					play = 'false'
+				}
+			}
+			log.info ("transfer " + transfer.status+"")
+			
+		}
+		//give the api some time to make the switch
+		sleep(500)
+		
+		def noShuffle = rest.put('https://api.spotify.com/v1/me/player/shuffle?state=false&access_token=' + token)
+		
+		def playPlaylistContent = [context_uri : "spotify:user:" + userID + ":playlist:" + playlistID, "offset": ["position": 0]]
+		def playPlaylist = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
             contentType("application/json")
-            json{ context_uri = "spotify:user:" + userID + ":playlist:" + playlistID }
+            json{ playPlaylistContent }
         }
-        
+
+		log.info ("play " + playPlaylist.status+"")
         return playPlaylist.json
 		
 	}
+	
 	
 	def deletePlaylist(def token, def userID, def playlistID) { 
 		// See FAQ in https://developer.spotify.com/web-api/remove-tracks-playlist/ : Deletion not possible, but unfollowing
@@ -58,6 +84,7 @@ class SpotifyService {
 		
 		return getPlaylistSongs.json
 	}
+
 	
 	def createPlaylist(def token, def playlistName, def user) {
         def playlist = rest.post('https://api.spotify.com/v1/users/' + user + '/playlists?access_token=' + token) {
@@ -70,20 +97,21 @@ class SpotifyService {
 	}
 	
 	// Defining song (track) services based on https://developer.spotify.com/web-api/endpoint-reference/
-	
 	def addSong(def token, def trackID, def playlistID, def userID) { 
+		
+		def songs = getPlaylistSongs(token, userID, playlistID);
+		def playlistSize = songs.items.length()
+		
+		def obj = [uris: ["spotify:track:" + trackID], position : playlistSize]
 		def addSong = rest.post('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) {
 			contentType("application/json")
 			json{
-				 uris = ["spotify:track:" + trackID]
+				 obj
 			}
 		}
-		
 		return addSong.json
-	
 	}
 	
-	// ToDo: Not sure if working :)
 	def deleteSong(def token, def userID, def playlistID, def trackID) {
 		def deleteSong = rest.delete('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token) { 
 			contentType("application/json")
@@ -118,6 +146,12 @@ class SpotifyService {
 		}
 		
 		return pauseSong.status
+	}
+	
+	def getSong(def token, def trackID) { 
+		def getSong = rest.get('https://api.spotify.com/v1/tracks/' + trackID + '?access_token=' + token)
+		
+		return getSong.json
 	}
 	
 	// Defining User services
