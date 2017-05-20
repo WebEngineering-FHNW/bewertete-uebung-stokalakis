@@ -88,5 +88,48 @@ class PlaylistController {
 		
 		redirect (action: "show", id: adminID)
 	}
+	
+	def pause() {
+		def adminID = params.id
+		def party = Party.findByAdminID(adminID)
+		def user = spotifyService.getUser(party.token)
+		
+		spotifyService.pauseSong(party.token)
+		log.info ("pause")
+		redirect (action: "show", id: adminID)
+	}
+	
+	// TODO: If new song is added during play and you press 'next', the newly added song does not play
+	def next() {
+		def adminID = params.id
+		def party = Party.findByAdminID(adminID)
+		def user = spotifyService.getUser(party.token)
+		
+		spotifyService.nextSong(party.token)
+		redirect (action: "show", id: adminID)
+		
+	}
+	
+	def previous() {
+		def adminID = params.id
+		def party = Party.findByAdminID(adminID)
+		def user = spotifyService.getUser(party.token)
+		
+		spotifyService.previousSong(party.token)
+		redirect (action: "show", id: adminID)
+		
+	}
+	
+	def delete() {
+		//deleteSong(def token, def userID, def playlistID, def trackID)
+		def adminID = params.id
+		def party = Party.findByAdminID(adminID)
+		def user = spotifyService.getUser(party.token)
+		def song = Song.findByPartyID(songID)
+		
+		spotifyService.deleteSong(party.token, user.id, party.playlistID, song.songID)
+		redirect (action: "show", id: adminID)
+		
+	}
 
 }

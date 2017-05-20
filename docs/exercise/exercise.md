@@ -55,7 +55,7 @@ External contributions:
 
 Other comments: 
 
-I'm particular proud of:
+I'm particular proud of: Complex O-AUTH verification (https://developer.spotify.com/web-api/authorization-guide/)
 
 
 ## Project grading 

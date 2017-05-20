@@ -141,7 +141,7 @@ class SpotifyService {
 	}
 	
 	def pauseSong(def token) {
-		def pauseSong = rest.post('https://api.spotify.com/v1/me/player/pause?access_token=' + token) { 
+		def pauseSong = rest.put('https://api.spotify.com/v1/me/player/pause?access_token=' + token) { 
 			contentType("application/json")
 		}
 		
