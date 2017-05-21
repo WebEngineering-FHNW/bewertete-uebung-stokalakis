@@ -20,6 +20,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/">Welcome</a></li>
 				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="/description">Project description</a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>

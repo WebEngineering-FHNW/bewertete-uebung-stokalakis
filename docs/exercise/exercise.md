@@ -49,13 +49,13 @@ How to start the project: (if other than `grailsw run-app`)
 
 How to test the project:  (if other than `grailsw test-app`)
 
-Project description:      (if other than `/index.html`)
+Project description:      /description
 
-External contributions:
+External contributions:	  ---
 
-Other comments: 
+Other comments: 		  Live demonstration is needed to show the interaction with Spotify.
 
-I'm particular proud of: Complex O-AUTH verification (https://developer.spotify.com/web-api/authorization-guide/)
+I'm particular proud of:  Complex O-AUTH verification (https://developer.spotify.com/web-api/authorization-guide/)
 
 
 ## Project grading 

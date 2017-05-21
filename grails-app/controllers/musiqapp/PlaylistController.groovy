@@ -121,7 +121,6 @@ class PlaylistController {
 	}
 	
 	def delete() {
-		//deleteSong(def token, def userID, def playlistID, def trackID)
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
 		def user = spotifyService.getUser(party.token)
