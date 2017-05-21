@@ -36,12 +36,11 @@
 
 		<div class="jumbotron">
 			<h1>About MusiQ App</h1>
-			<p class="lead">The MusiQ App allows you to create playlists and
+			<p class="lead">The MusiQ App allows you to create and
 				administrate a playlist if you have a Spotify Premium Account. Share
 				the ID with your friends and allow them to search and add tracks to
-				your playlist. As the admin, you have the full control over the
-				playlist and can pause, skip or stop playback or delete certain
-				tracks.</p>
+				your playlist. As admin, you have the full control over the playlist
+				and you can stop the playback and skip or delete certain songs.</p>
 		</div>
 
 		<div class="row marketing">

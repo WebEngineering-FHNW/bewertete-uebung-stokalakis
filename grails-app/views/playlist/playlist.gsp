@@ -82,7 +82,7 @@
 						<p>${song.artist} - ${song.album}</p>
 					</div> <g:if test="${admin}">
 						<div class="media-right">
-							<a href="/playlist/delete/${party.adminID}&${song.songID}"
+							<a href="/playlist/delete/${party.adminID}?songID=${song.songID}"
 								class="btn btn-success btn-lg"> <span
 								class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>

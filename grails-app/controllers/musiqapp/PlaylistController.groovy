@@ -12,7 +12,6 @@ class PlaylistController {
 	def addSong() {
 		def songID = params.song
 		def partyID = params.id
-		//def playlistID = params.playlist
 		def admin = partyID.startsWith("A")
 		def party
 		if(admin) { 
@@ -124,9 +123,15 @@ class PlaylistController {
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
 		def user = spotifyService.getUser(party.token)
-		def song = Song.findByPartyID(songID)
+		def songID = params.songID
 		
-		spotifyService.deleteSong(party.token, user.id, party.playlistID, song.songID)
+		def deleted
+		Song.withTransaction { status ->
+			song.delete()
+			deleted = spotifyService.deleteSong(party.token, user.id, party.playlistID, songID)
+		}
+		
+		log.info(deleted.toString())
 		redirect (action: "show", id: adminID)
 		
 	}
