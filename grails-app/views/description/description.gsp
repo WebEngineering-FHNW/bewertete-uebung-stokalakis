@@ -87,6 +87,16 @@
 					to know the unique public ID of the playlist to add a song ("login
 					screen": Name and ID)</p>
 
+				<h4>TODOs</h4>
+				<p>
+					- (Admin) (Shuffle?, Repeat?, Pause/Resume?, Play specific song?)
+					button<br> - (Optional) Input field with username (atm, we
+					don't know who adds songs) / Poll functionality<br> - Proper
+					exception handling<br> - Mark current playing song<br> -
+					Testing<br> - Set navigation as a template<br> -
+					(Optional) What happens if someone wants to add a song after one
+					hour (token expired)?<br>
+				</p>
 			</div>
 		</div>
 

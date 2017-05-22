@@ -62,14 +62,6 @@
 					class="glyphicon glyphicon-search" aria-hidden="true"></span>
 				</a>
 			</g:else>
-
-			<!--  TODO: If Admin: Delete, (Shuffle?, Repeat?, Pause/Resume?, Play specific song?) button -->
-			<!--  Optional TODO: Input field with username (atm, we don't know who adds songs) / Poll functionality-->
-			<!--  TODO: Proper exception handling -->
-			<!--  TODO: Mark current playing song -->
-			<!--  TODO: Testing -->
-			<!--  TODO: Set navigation as a template -->
-
 		</div>
 		<ul class="media-list">
 			<g:each var="song" in="${party.songs}">
