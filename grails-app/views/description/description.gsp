@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="layout" content="nav" />
 
 <title>Project description</title>
 
@@ -16,21 +17,6 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand">MusiQ App</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="/">Welcome</a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="/description">Project description</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 
 	<div class="container">
 
@@ -93,9 +79,10 @@
 					button<br> - (Optional) Input field with username (atm, we
 					don't know who adds songs) / Poll functionality<br> - Proper
 					exception handling<br> - Mark current playing song<br> -
-					Testing<br> - Set navigation as a template<br> -
-					(Optional) What happens if someone wants to add a song after one
-					hour (token expired)?<br>- (Optional) Pagination for search results
+					Testing<br>- (Optional) What happens if someone wants to add a
+					song after one hour (token expired)?<br>- (Optional)
+					Pagination for search results<br> - (Optional) Copy to
+					clipboard button
 				</p>
 			</div>
 		</div>
