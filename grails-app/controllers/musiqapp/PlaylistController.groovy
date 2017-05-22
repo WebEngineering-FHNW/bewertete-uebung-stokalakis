@@ -98,7 +98,7 @@ class PlaylistController {
 		redirect (action: "show", id: adminID)
 	}
 	
-	// TODO: If new song is added during play and you press 'next', the newly added song does not play
+	// TODO: If new song is added during play and you press 'next', the newly added song does not play (song is unknown for current session)
 	def next() {
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
@@ -127,6 +127,7 @@ class PlaylistController {
 		
 		def deleted
 		Song.withTransaction { status ->
+			def song = Song.findByPartyAndSongID(party, songID)
 			song.delete()
 			deleted = spotifyService.deleteSong(party.token, user.id, party.playlistID, songID)
 		}
