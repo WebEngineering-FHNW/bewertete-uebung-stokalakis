@@ -98,7 +98,7 @@ class PlaylistController {
 		redirect (action: "show", id: adminID)
 	}
 	
-	// TODO: If new song is added during play and you press 'next', the newly added song does not play (song is unknown for current session)
+	// BUG (https://github.com/spotify/web-api/issues/537): If you add a new song and press next, the new song it not recognised by the application. This is a bug from Spotify and cannot be solved at this time.
 	def next() {
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)

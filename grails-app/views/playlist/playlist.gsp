@@ -28,16 +28,26 @@
 	</nav>
 	<div class="container">
 		<div class="jumbotron">
-			<p class="lead">Party: ${party.name}</p>
-			<p>Your party's public ID is: ${party.publicID}</p>
-
+			<div class="row text-left">
+			  <h3><div class="col-md-6"><span class="label label-info">Party</span></div></h3>
+			  <h4><div class="col-md-6"><div class="well well-sm">${party.name}</div></div></h4>
+			</div>
+			<div class="row text-left">
+			  <h3><div class="col-md-6"><span class="label label-info">Your party's public ID is</span></div></h3>
+			  <h4><div class="col-md-6"><div class="well well-sm">${party.publicID}</div></div></h4>
+			</div>
 			<g:if test="${admin}">
-				<p>Your party's admin ID is: ${party.adminID}</p>
+				<div class="row text-left">
+				  <h3><div class="col-md-6"><span class="label label-info">Your party's admin ID is</span></div></h3>
+				  <h4><div class="col-md-6"><div class="well well-sm">${party.adminID}</div></div></h4>
+				</div>
 			</g:if>
-			<p class="lead">Host: ${user.id}</p>
-
+			<div class="row text-left">
+			  <h3><div class="col-md-6"><span class="label label-info">Host</span></div></h3>
+			  <h4><div class="col-md-6"><div class="well well-sm">${user.id}</div></div></h4>
+			</div>
 			<g:if test="${admin}">
-				<div class="btn-group btn-group-xs" role="group" aria-label="...">
+				<div class="btn-group btn-group-xs" role="group">
 					<a href="/search/index/${party.adminID}"
 						class="btn btn-success btn-lg"> <span
 						class="glyphicon glyphicon-search" aria-hidden="true"></span>

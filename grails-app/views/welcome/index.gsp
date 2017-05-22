@@ -47,7 +47,7 @@
 					<label for="partyID" class="sr-only">Party-ID</label> <input
 						name="partyID" id="inputEmail" class="form-control"
 						placeholder="Party-ID" required autofocus> <br />
-					<button class="btn btn-lg btn-primary" type="submit">Join
+					<button class="btn btn-lg btn-info" type="submit">Join
 						party</button>
 				</div>
 			</form>

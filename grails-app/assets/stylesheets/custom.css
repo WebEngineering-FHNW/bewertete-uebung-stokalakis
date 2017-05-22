@@ -2,6 +2,11 @@ body {
   padding-top: 70px;
 }
 
+.label {
+  min-width: 250px !important;
+  display: inline-block !important
+}
+
 .header,
 .marketing,
 .footer {

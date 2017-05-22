@@ -34,7 +34,7 @@
 					<label for="partyID" class="sr-only">Party-ID</label> <input
 						type="text" name="search" class="form-control"
 						placeholder="Song, Artist or Album" required autofocus> <br />
-					<button type="submit" class="btn btn-right" aria-label="Left Align">
+					<button type="submit" class="btn btn-success btn-lg" aria-label="Left Align">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
 				</div>
