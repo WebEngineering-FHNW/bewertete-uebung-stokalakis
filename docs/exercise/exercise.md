@@ -53,7 +53,7 @@ Project description:      /description
 
 External contributions:	  ---
 
-Other comments: 		  Live demonstration is needed to show the interaction with Spotify.
+Other comments: 		  If possible, live demonstration is recommendable to show interaction with Spotify.
 
 I'm particular proud of:  Complex O-AUTH verification (https://developer.spotify.com/web-api/authorization-guide/)
 
