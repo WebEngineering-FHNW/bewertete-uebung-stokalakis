@@ -13,7 +13,7 @@ class LoginController {
 		def code = params.code
 		def state = params.state
 		
-		//generate the ids for the party
+		// generate the ids for the party
 		def publicID = "P" + randomGenerator.randomString(8)
 		def adminID = "A" + randomGenerator.randomString(8)
 		
@@ -25,10 +25,12 @@ class LoginController {
 			grailsApplication.config.getProperty('app.spotify.client_id'),
 			grailsApplication.config.getProperty('app.spotify.client_secret'))
 		
+		// creates new Party object with the token
 		Party party = new Party(token: loginResult.access_token, 
 			refreshToken: loginResult.refresh_token,
 			adminID: adminID, publicID: publicID).save(failOnError:true)
 		
+		// render the create view after successful login
 		render (view: "/login/create", model: [party: party])
 		
 	}

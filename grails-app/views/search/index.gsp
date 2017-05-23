@@ -13,6 +13,8 @@
 </head>
 <body>
 	<div class="container">
+		
+		<!-- Search starts here -->
 		<div class="jumbotron">
 			<p class="lead">Search a song you'd like to add to the playlist.</p>
 			<form action="/search/index/${id}" method="post">
@@ -27,6 +29,9 @@
 				</div>
 			</form>
 		</div>
+		<!-- Search ends here -->
+		
+		<!-- Search resultset starts here, if resultset is not empty -->
 		<g:if test="${searchSong}">
 			<ul class="media-list">
 				<g:each var="song" in="${searchSong.tracks.items}">
@@ -49,6 +54,7 @@
 				</g:each>
 			</ul>
 		</g:if>
+		<!-- Search resultset ends here -->
 	</div>
 </body>
 </html>

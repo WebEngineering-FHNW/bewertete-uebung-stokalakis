@@ -15,6 +15,8 @@
 <body>
 	<div class="container">
 		<div class="jumbotron">
+
+			<!--  Information about your party starts here -->
 			<div class="row text-left">
 				<h3>
 					<div class="col-md-6">
@@ -65,6 +67,9 @@
 					</div>
 				</h4>
 			</div>
+			<!-- Information about your party ends here -->
+
+			<!-- Admin buttons start here-->
 			<g:if test="${admin}">
 				<div class="btn-group btn-group-xs" role="group">
 					<a href="/search/index/${party.adminID}"
@@ -85,6 +90,7 @@
 					</a>
 				</div>
 			</g:if>
+			<!-- Admin buttons end here-->
 			<g:else>
 				<a href="/search/index/${party.publicID}"
 					class="btn btn-success btn-lg"> <span
@@ -92,6 +98,7 @@
 				</a>
 			</g:else>
 		</div>
+		<!-- Playlist is created here; page refreshes every 15s to show newly added songs -->
 		<div class="jumbotron">
 			<ul class="media-list">
 				<g:each var="song" in="${party.songs}">

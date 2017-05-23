@@ -18,6 +18,8 @@
 
 <body>
 
+	<!-- Project description starts here; same content as the initial commit proposal -->
+
 	<div class="container">
 
 		<div class="jumbotron">

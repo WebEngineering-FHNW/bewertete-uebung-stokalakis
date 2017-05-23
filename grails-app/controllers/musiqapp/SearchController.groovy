@@ -18,14 +18,18 @@ class SearchController {
 			party = Party.findByPublicID(partyID)
 		}
 		
+		// variables which are hardcoded at the moment. Spotify does not provide more then 50 results per query
 		def type = "track"
 		def limit = 50
+		
 		def searchSong
 		
+		// search service is only called if string is not empty
 		if(search) {
 			searchSong = spotifyService.searchSong(search, type, limit)
 		}
-
+		
+		// render index view again
 		render(view: "index", model: [searchSong: searchSong, party: party, id: partyID])
 	}
 

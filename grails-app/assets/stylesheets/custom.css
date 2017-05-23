@@ -1,3 +1,4 @@
+/* adding padding on the top and a background picture*/
 body {
   padding-top: 70px;
   background-color: rgba(53, 10, 4, .5);
@@ -7,6 +8,7 @@ body {
 
 }
 
+/* overlay for the background picture */
 .bg-overlay {
     background: url("../images/overlay.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
     height: 100%;
@@ -17,11 +19,13 @@ body {
     z-index: 0;
 }
 
+/* provide fixed width for labels */
 .label {
   min-width: 250px !important;
   display: inline-block !important
 }
 
+/* standard jumbotron css starts here (only few changes have been made) */
 .header,
 .marketing,
 .footer {
@@ -87,4 +91,5 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+  /* standard jumbotron css ends here */
 }

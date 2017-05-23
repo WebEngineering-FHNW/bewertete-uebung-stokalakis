@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 
 class RandomGenerator {
 
+	// Generates random strings within the alphabet and numbers - needed for public and admin IDs
 	String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	SecureRandom rnd = new SecureRandom();
 	

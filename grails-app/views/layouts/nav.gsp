@@ -14,7 +14,11 @@
 <g:layoutHead />
 </head>
 <body>
+
+	<!-- Adding overlay here, see custom.css -->
 	<div class="bg-overlay"></div>
+
+	<!-- Navigation starts here and is implemented by each .gsp file -->
 	<nav class="navbar navbar-default navbar-fixed-top"
 		style="opacity: 0.8">
 		<div class="container">

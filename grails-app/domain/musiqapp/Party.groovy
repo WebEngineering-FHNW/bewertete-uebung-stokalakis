@@ -3,6 +3,8 @@ package musiqapp
 import grails.rest.Resource
 
 class Party {
+
+	// Domain to create party table, which is related to Songs and Users
     String name
     String token
     String refreshToken
@@ -20,6 +22,7 @@ class Party {
 		adminID unique: true
     }
     
+    // Ordering is made via database to ensure the correct list order in the UI
     static mapping = {
     	songs sort: 'dateAdded', order: 'asc'
 	}

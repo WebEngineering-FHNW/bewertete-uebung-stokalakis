@@ -19,12 +19,16 @@
 				favourite songs.</p>
 			<p>
 			<form class="form-signin">
+
+				<!-- O-AUTH starts here; we provide scopes and a state to Spotify -->
 				<a
 					href="${grailsApplication.config.app.spotify?.auth_url}?client_id=${grailsApplication.config.app.spotify?.client_id}&response_type=code&redirect_uri=${grailsApplication.config.app.spotify?.redirect_uri}&scope=${grailsApplication.config.app.spotify?.scope}&state=${session.id}"
 					class="btn btn-lg btn-success" role="button">Create party</a>
 			</form>
 			</p>
 			<hr />
+			
+			<!-- Join a party parts starts here where you're able to login via a admin or public IDs -->
 			<p class="lead">Join a party by entering the ID.
 			<form action="/playlist/join" method="post">
 				<div class="input-group-lg">
