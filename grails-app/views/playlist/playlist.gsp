@@ -89,8 +89,8 @@
 						class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
 					</a>
 				</div>
+				<!-- Admin buttons end here-->
 			</g:if>
-			<!-- Admin buttons end here-->
 			<g:else>
 				<a href="/search/index/${party.publicID}"
 					class="btn btn-success btn-lg"> <span

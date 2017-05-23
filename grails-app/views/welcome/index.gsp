@@ -20,7 +20,7 @@
 			<p>
 			<form class="form-signin">
 
-				<!-- O-AUTH starts here; we provide scopes and a state to Spotify -->
+				<!-- O-AUTH 2.0 starts here; we provide scopes and a state to Spotify -->
 				<a
 					href="${grailsApplication.config.app.spotify?.auth_url}?client_id=${grailsApplication.config.app.spotify?.client_id}&response_type=code&redirect_uri=${grailsApplication.config.app.spotify?.redirect_uri}&scope=${grailsApplication.config.app.spotify?.scope}&state=${session.id}"
 					class="btn btn-lg btn-success" role="button">Create party</a>
