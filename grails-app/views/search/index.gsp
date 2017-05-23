@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="layout" content="nav"/>
+<meta name="layout" content="nav" />
 <title>MusiQ App</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -20,7 +20,8 @@
 					<label for="partyID" class="sr-only">Party-ID</label> <input
 						type="text" name="search" class="form-control"
 						placeholder="Song, Artist or Album" required autofocus> <br />
-					<button type="submit" class="btn btn-success btn-lg" aria-label="Left Align">
+					<button type="submit" class="btn btn-success btn-lg"
+						aria-label="Left Align">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
 				</div>

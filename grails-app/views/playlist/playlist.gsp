@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="layout" content="nav"/>
+<meta name="layout" content="nav" />
 <META HTTP-EQUIV="refresh" CONTENT="15">
 <title>MusiQ App</title>
 <link rel="stylesheet"
@@ -16,22 +16,54 @@
 	<div class="container">
 		<div class="jumbotron">
 			<div class="row text-left">
-			  <h3><div class="col-md-6"><span class="label label-info">Party</span></div></h3>
-			  <h4><div class="col-md-6"><div class="well well-sm">${party.name}</div></div></h4>
+				<h3>
+					<div class="col-md-6">
+						<span class="label label-info">Party</span>
+					</div>
+				</h3>
+				<h4>
+					<div class="col-md-6">
+						<div class="well well-sm">${party.name}</div>
+					</div>
+				</h4>
 			</div>
 			<div class="row text-left">
-			  <h3><div class="col-md-6"><span class="label label-info">Your party's public ID is</span></div></h3>
-			  <h4><div class="col-md-6"><div class="well well-sm" id="p1">${party.publicID}</div></div></h4>
+				<h3>
+					<div class="col-md-6">
+						<span class="label label-info">Your party's public ID is</span>
+					</div>
+				</h3>
+				<h4>
+					<div class="col-md-6">
+						<div class="well well-sm" id="p1">${party.publicID}</div>
+					</div>
+				</h4>
 			</div>
 			<g:if test="${admin}">
 				<div class="row text-left">
-				  <h3><div class="col-md-6"><span class="label label-info">Your party's admin ID is</span></div></h3>
-				  <h4><div class="col-md-6"><div class="well well-sm">${party.adminID}</div></div></h4>
+					<h3>
+						<div class="col-md-6">
+							<span class="label label-info">Your party's admin ID is</span>
+						</div>
+					</h3>
+					<h4>
+						<div class="col-md-6">
+							<div class="well well-sm">${party.adminID}</div>
+						</div>
+					</h4>
 				</div>
 			</g:if>
 			<div class="row text-left">
-			  <h3><div class="col-md-6"><span class="label label-info">Host</span></div></h3>
-			  <h4><div class="col-md-6"><div class="well well-sm">${user.id}</div></div></h4>
+				<h3>
+					<div class="col-md-6">
+						<span class="label label-info">Host</span>
+					</div>
+				</h3>
+				<h4>
+					<div class="col-md-6">
+						<div class="well well-sm">${user.id}</div>
+					</div>
+				</h4>
 			</div>
 			<g:if test="${admin}">
 				<div class="btn-group btn-group-xs" role="group">
@@ -60,26 +92,29 @@
 				</a>
 			</g:else>
 		</div>
-		<ul class="media-list">
-			<g:each var="song" in="${party.songs}">
-				<li class="media" style="padding-left: 15px;">
-					<div class="media-left">
-						<img class="media-object" src="${song.image}">
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">${song.name}</h4>
-						<p>${song.artist} - ${song.album}</p>
-					</div> <g:if test="${admin}">
-						<div class="media-right">
-							<a href="/playlist/delete/${party.adminID}?songID=${song.songID}"
-								class="btn btn-success btn-lg"> <span
-								class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							</a>
+		<div class="jumbotron">
+			<ul class="media-list">
+				<g:each var="song" in="${party.songs}">
+					<li class="media" style="padding-left: 15px;">
+						<div class="media-left">
+							<img class="media-object" src="${song.image}">
 						</div>
-					</g:if>
-				</li>
-			</g:each>
-		</ul>
+						<div class="media-body">
+							<h4 class="media-heading">${song.name}</h4>
+							<p>${song.artist} - ${song.album}</p>
+						</div> <g:if test="${admin}">
+							<div class="media-right">
+								<a
+									href="/playlist/delete/${party.adminID}?songID=${song.songID}"
+									class="btn btn-success btn-lg"> <span
+									class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								</a>
+							</div>
+						</g:if>
+					</li>
+				</g:each>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

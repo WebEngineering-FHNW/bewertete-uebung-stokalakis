@@ -1,5 +1,20 @@
 body {
   padding-top: 70px;
+  background-color: rgba(53, 10, 4, .5);
+  background-image:url(../images/background.jpg);
+  background-size: cover;
+  background-repeat: repeat;
+
+}
+
+.bg-overlay {
+    background: url("../images/overlay.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 0;
 }
 
 .label {
@@ -43,7 +58,9 @@ body {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
+  opacity: 0.8;
 }
+
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
@@ -52,6 +69,7 @@ body {
 .marketing {
   margin: 40px 0;
 }
+
 .marketing p + h4 {
   margin-top: 28px;
 }

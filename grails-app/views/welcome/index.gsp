@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="layout" content="nav"/>
+<meta name="layout" content="nav" />
 <title>MusiQ App</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -19,11 +19,9 @@
 				favourite songs.</p>
 			<p>
 			<form class="form-signin">
-				<!--<button class="btn btn-lg btn-success" type="submit">Create Party</button>-->
 				<a
 					href="${grailsApplication.config.app.spotify?.auth_url}?client_id=${grailsApplication.config.app.spotify?.client_id}&response_type=code&redirect_uri=${grailsApplication.config.app.spotify?.redirect_uri}&scope=${grailsApplication.config.app.spotify?.scope}&state=${session.id}"
 					class="btn btn-lg btn-success" role="button">Create party</a>
-				<!--<a href="https://accounts.spotify.com/authorize/?client_id=4a5ac7cf14e5401eb23430dc40164849&response_type=code&redirect_uri=http://localhost:8080/login/callback&scope=user-read-email playlist-read-private playlist-modify-private user-read-playback-state user-modify-playback-state&state=34fFs29kd09" class="btn btn-info" role="button">New party</a>-->
 			</form>
 			</p>
 			<hr />
