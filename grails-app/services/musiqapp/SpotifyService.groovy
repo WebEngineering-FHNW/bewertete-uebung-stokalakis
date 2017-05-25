@@ -18,14 +18,17 @@ class SpotifyService {
 		form.add("redirect_uri", "http://localhost:8080/login/callback")
 		// EXTERNAL END
 
-        def resp = rest.post('https://accounts.spotify.com/api/token') {
+        def login = rest.post('https://accounts.spotify.com/api/token') {
             auth (clientId, clientSecret)
            	accept("application/json")
 		    contentType("application/x-www-form-urlencoded")
 		    body(form)
         }
+        if(login.status >= 400){ 
+        	throw new Exception("Service call failed with error " + login.status)
+        }
         
-        return resp.json
+        return login.json
 	}
 	
 	// ### Defining playlist services based on https://developer.spotify.com/web-api/endpoint-reference/ // token needed ###
@@ -36,7 +39,9 @@ class SpotifyService {
 		def devices = rest.get('https://api.spotify.com/v1/me/player/devices?access_token=' + token) {
 			contentType("application/json")
 		}
-		
+		if(devices.status >= 400){ 
+        	throw new Exception("Service call failed with error " + devices.status)
+        }
 		// get first device
 		if(devices.status == 200 && devices.json.devices.length() > 0){
 			def deviceId = devices.json.devices.id[0]
@@ -48,7 +53,9 @@ class SpotifyService {
 					play = 'false'
 				}
 			}
-			log.info ("transfer " + transfer.status+"")
+			if(transfer.status >= 400){ 
+        		throw new Exception("Service call failed with error " + transfer.status)
+        	}
 			
 		}
 		// give the api some time to make the switch
@@ -56,12 +63,18 @@ class SpotifyService {
 		
 		def noShuffle = rest.put('https://api.spotify.com/v1/me/player/shuffle?state=false&access_token=' + token)
 		
+		if(noShuffle.status >= 400){ 
+        	throw new Exception("Service call failed with error " + noShuffle.status)
+        }
+		
 		def playPlaylistContent = [context_uri : "spotify:user:" + userID + ":playlist:" + playlistID, "offset": ["position": 0]]
 		def playPlaylist = rest.put('https://api.spotify.com/v1/me/player/play?access_token=' + token) {
             contentType("application/json")
             json{ playPlaylistContent }
         }
-
+		if(playPlaylist.status >= 400){ 
+        		throw new Exception("Service call failed with error " + playPlaylist.status)
+        }
 		log.info ("play " + playPlaylist.status+"")
         return playPlaylist.json
 		
@@ -71,20 +84,27 @@ class SpotifyService {
 	def deletePlaylist(def token, def userID, def playlistID) { 
 		// See FAQ in https://developer.spotify.com/web-api/remove-tracks-playlist/ : Deletion not possible, but unfollowing
 		def delete = rest.delete('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/followers?access_token=' + token)
+		if(delete.status >= 400){ 
+        	throw new Exception("Service call failed with error " + delete.status)
+        }
 		return delete.status
 	}
 	
 	// get a users playlist
 	def getUserPlaylists(def token, def userID) {
-			def getUserPlaylists = rest.get('https://api.spotify.com/v1/users/' + userID + '/playlists?access_token=' + token)
-			
-			return getUserPlaylists.json
+		def getUserPlaylists = rest.get('https://api.spotify.com/v1/users/' + userID + '/playlists?access_token=' + token)
+		if(getUserPlaylists.status >= 400){ 
+        	throw new Exception("Service call failed with error " + getUserPlaylists.status)
+        }
+		return getUserPlaylists.json
 	}
 	
 	// get the songs from a playlist
 	def getPlaylistSongs(def token, def userID, def playlistID) {
 		def getPlaylistSongs = rest.get('https://api.spotify.com/v1/users/' + userID + '/playlists/' + playlistID + '/tracks?access_token=' + token)
-		
+		if(getPlaylistSongs.status >= 400){ 
+        	throw new Exception("Service call failed with error " + getPlaylistSongs.status)
+        }
 		return getPlaylistSongs.json
 	}
 
@@ -94,7 +114,9 @@ class SpotifyService {
             contentType("application/json")
             body("{\"name\" : \"" + playlistName + "\", \"public\" : false}")
         }
-        
+        if(playlist.status >= 400){ 
+        	throw new Exception("Service call failed with error " + playlist.status)
+        }
         return playlist.json
 		
 	}
@@ -114,6 +136,9 @@ class SpotifyService {
 				 obj
 			}
 		}
+		if(addSong.status >= 400){ 
+        	throw new Exception("Service call failed with error " + addSong.status)
+        }
 		return addSong.json
 	}
 	
@@ -125,7 +150,9 @@ class SpotifyService {
 				tracks = [{ uri = "spotify:track:" + trackID }]
 			}
 		}
-		
+		if(deleteSong.status >= 400){ 
+        	throw new Exception("Service call failed with error " + deleteSong.status)
+        }
 		return deleteSong.json
 	}
 	
@@ -134,7 +161,9 @@ class SpotifyService {
 		def nextSong = rest.post('https://api.spotify.com/v1/me/player/next?access_token=' + token) { 
 			contentType("application/json")
 		}
-		
+		if(nextSong.status >= 400){ 
+        	throw new Exception("Service call failed with error " + nextSong.status)
+        }
 		return nextSong.status
 		
 	}
@@ -144,7 +173,9 @@ class SpotifyService {
 		def previousSong = rest.post('https://api.spotify.com/v1/me/player/previous?access_token=' + token) {
 			contentType("application/json")
 		}
-		
+		if(previousSong.status >= 400){ 
+        	throw new Exception("Service call failed with error " + previousSong.status)
+        }
 		return previousSong.status
 	}
 	
@@ -153,14 +184,18 @@ class SpotifyService {
 		def pauseSong = rest.put('https://api.spotify.com/v1/me/player/pause?access_token=' + token) { 
 			contentType("application/json")
 		}
-		
+		if(pauseSong.status >= 400){ 
+        	throw new Exception("Service call failed with error " + pauseSong.status)
+        }
 		return pauseSong.status
 	}
 	
 	// get a songs information
 	def getSong(def token, def trackID) { 
 		def getSong = rest.get('https://api.spotify.com/v1/tracks/' + trackID + '?access_token=' + token)
-		
+		if(getSong.status >= 400){ 
+        	throw new Exception("Service call failed with error " + getSong.status)
+        }
 		return getSong.json
 	}
 	
@@ -169,7 +204,9 @@ class SpotifyService {
 	// get a user
 	def getUser(def token) {
 		def user = rest.get('https://api.spotify.com/v1/me?access_token=' + token)
-		
+		if(user.status >= 400){ 
+        	throw new Exception("Service call failed with error " + user.status)
+        }
 		return user.json
 		
 	}
@@ -180,7 +217,9 @@ class SpotifyService {
 	def searchSong(def query, def type, def limit) {
 		
 		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=' + type + '&limit=' + limit)
-		
+		if(searchSong.status >= 400){ 
+        	throw new Exception("Service call failed with error " + searchSong.status)
+        }
 		return searchSong.json
 		
 	}

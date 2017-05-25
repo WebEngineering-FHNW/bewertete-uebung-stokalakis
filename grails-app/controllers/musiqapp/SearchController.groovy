@@ -25,9 +25,13 @@ class SearchController {
 		def searchSong
 		
 		// search service is only called if string is not empty
-		if(search) {
-			searchSong = spotifyService.searchSong(search, type, limit)
-		}
+		try {
+			if(search) {
+				searchSong = spotifyService.searchSong(search, type, limit)
+			}
+		} catch (Exception e) {
+			throw new Exception("Search is not working. Details: " + e)
+   		}
 		
 		// render index view again
 		render(view: "index", model: [searchSong: searchSong, party: party, id: partyID])

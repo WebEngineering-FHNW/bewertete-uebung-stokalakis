@@ -83,7 +83,10 @@
 						(Optional) Mark current playing song<br> - Testing<br>-
 						(Optional) What happens if someone wants to add a song after one
 						hour (token expired)?<br>- (Optional) Pagination for search
-						results<br> - (Optional) Copy to clipboard button
+						results<br> - (Optional) Copy to clipboard button<br>-
+						(Optional) When deleting a song which appears twice in the same
+						playlist, it deletes the first one, regardless of which song you
+						choose
 					</p>
 				</div>
 			</div>

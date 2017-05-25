@@ -16,14 +16,18 @@ class LoginController {
 		// generate the ids for the party
 		def publicID = "P" + randomGenerator.randomString(8)
 		def adminID = "A" + randomGenerator.randomString(8)
-		
 		if(params.state != session.id){
-			throw new Exception("session ids do not match")
+			throw new Exception("Session IDs do not match.")
 		}
 		
-		def loginResult = spotifyService.login(code,
+		def loginResult
+		try {
+      		loginResult = spotifyService.login(code,
 			grailsApplication.config.getProperty('app.spotify.client_id'),
 			grailsApplication.config.getProperty('app.spotify.client_secret'))
+   		} catch (Exception e) {
+			throw new Exception("Could not login to Spotify. Details: " + e)
+   		}
 		
 		// creates new Party object with the token
 		Party party = new Party(token: loginResult.access_token, 

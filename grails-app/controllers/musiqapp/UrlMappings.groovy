@@ -11,9 +11,7 @@ class UrlMappings {
 		
 		// now redirecting directly to my app
 		"/"(view:"/welcome/index")
-		
-        //"/"(view:"/index")
-        "500"(view:'/error')
+		"500"(view: 'customError')
         "404"(view:'/notFound')
         
         "/description"(view:"/description/description")

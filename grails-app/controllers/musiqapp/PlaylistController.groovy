@@ -22,17 +22,31 @@ class PlaylistController {
 			party = Party.findByPublicID(partyID)
 		}
 		
-		def user = spotifyService.getUser(party.token)
-		def song = spotifyService.getSong(party.token, songID)
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
+   		
+   		def song
+   		try {
+			song = spotifyService.getSong(party.token, songID)
+		} catch (Exception e) {
+			throw new Exception("Could not get song. Details: " + e)
+   		}
 		
 		// add song to db (with transaction --> both ways (db & spotify) have to be successful, otherwise both fail --> this ensures that you're in sync)
 		def added
-		Song.withTransaction { status ->
+		try {
+			Song.withTransaction { status ->
 			new Song(image: song.album.images[2].url, album: song.album.name, name: song.name, artist: song.artists[0].name, songID : songID, dateAdded: new Date(), party: party).save(failOnError:true)
 			added = spotifyService.addSong(party.token, songID, party.playlistID, user.id)
 			log.info(added.toString())
-			
-		}
+			}
+		} catch (Exception e) {
+			throw new Exception("Could not add song to database or Spotify playlist. Details: " + e)
+   		}
 		
 		log.info(added.toString())
 
@@ -51,7 +65,12 @@ class PlaylistController {
 			party = Party.findByPublicID(partyID)
 		}
 
-		def user = spotifyService.getUser(party.token)
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
 			
 		render(view: "playlist", model: [admin: admin, party: party, user: user])
 	}
@@ -62,24 +81,45 @@ class PlaylistController {
 		def adminID = params.adminID
 		def party = Party.findByAdminID(adminID)
 		party.name = name
-		
-		def user = spotifyService.getUser(party.token)
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
 		
 		// we add "mq_" before each playlist to know, which playlist has been created by the app in the Spotify account
-		def playlistID = spotifyService.createPlaylist(party.token, "mq_" + party.name, user.id).id
+		def playlistID
+		try {
+			playlistID = spotifyService.createPlaylist(party.token, "mq_" + party.name, user.id).id
+			party.playlistID = playlistID
+			party.save(flush: true, failOnError: true)
+		} catch (Exception e) {
+			throw new Exception("Could not create playlist. Details: " + e)
+   		}
 
-		party.playlistID = playlistID
-
-		party.save(flush: true, failOnError: true)
 		log.info ("created");
 		redirect (action: "show", id: adminID)
 		
 	}
 	
 	// join a party method
-	def join() { 
+	def join() {
 		def partyID = params.partyID
 		log.info partyID
+		def admin = partyID.startsWith("A")
+		def party
+		if(admin) { 
+			party = Party.findByAdminID(partyID)
+		} else { 
+			party = Party.findByPublicID(partyID)
+		}
+		
+		// validate party ID input (label appears if party ID is unknown)
+		if(party == null){
+			render(view: "/welcome/index", model: [error: "Party ID does not exist. Please retry."])
+			return
+		}
 		redirect (action: "show", id: partyID)
 	}
 	
@@ -87,9 +127,18 @@ class PlaylistController {
 	def play() { 
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
-		def user = spotifyService.getUser(party.token)
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
 		
-		spotifyService.playPlaylist(party.token, user.id, party.playlistID)
+		try {
+			spotifyService.playPlaylist(party.token, user.id, party.playlistID)
+		} catch (Exception e) {
+			throw new Exception("Could not play playlisst. Details: " + e)
+   		}
 		redirect (action: "show", id: adminID)
 	}
 	
@@ -97,9 +146,18 @@ class PlaylistController {
 	def pause() {
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
-		def user = spotifyService.getUser(party.token)
-		
-		spotifyService.pauseSong(party.token)
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
+   		
+   		try {
+			spotifyService.pauseSong(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not pause playlist. Details: " + e)
+   		}
 		redirect (action: "show", id: adminID)
 	}
 	
@@ -108,9 +166,18 @@ class PlaylistController {
 	def next() {
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
-		def user = spotifyService.getUser(party.token)
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
 		
-		spotifyService.nextSong(party.token)
+		try {
+			spotifyService.nextSong(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not play next song. Details: " + e)
+   		}
 		redirect (action: "show", id: adminID)
 		
 	}
@@ -119,9 +186,18 @@ class PlaylistController {
 	def previous() {
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
-		def user = spotifyService.getUser(party.token)
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
 		
-		spotifyService.previousSong(party.token)
+		try {
+			spotifyService.previousSong(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not play previous song. Details: " + e)
+   		}
 		redirect (action: "show", id: adminID)
 		
 	}
@@ -130,17 +206,26 @@ class PlaylistController {
 	def delete() {
 		def adminID = params.id
 		def party = Party.findByAdminID(adminID)
-		def user = spotifyService.getUser(party.token)
 		def songID = params.songID
+		def user
+		try {
+			user = spotifyService.getUser(party.token)
+		} catch (Exception e) {
+			throw new Exception("Could not get user. Details: " + e)
+   		}
 		
 		// again with transaction to ensure being in sync
 		def deleted
-		Song.withTransaction { status ->
-			def song = Song.findByPartyAndSongID(party, songID)
-			song.delete()
-			deleted = spotifyService.deleteSong(party.token, user.id, party.playlistID, songID)
-		}
-		
+		try {
+			Song.withTransaction { status ->
+				def song = Song.findByPartyAndSongID(party, songID)
+				song.delete()
+				deleted = spotifyService.deleteSong(party.token, user.id, party.playlistID, songID)
+			}
+		} catch (Exception e) {
+			throw new Exception("Could not delete song from database or Spotify playlist. Details: " + e)
+   		}
+   		
 		log.info(deleted.toString())
 		redirect (action: "show", id: adminID)
 		
