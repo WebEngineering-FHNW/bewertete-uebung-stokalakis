@@ -4,7 +4,7 @@ app:
       client_id: 4a5ac7cf14e5401eb23430dc40164849
       client_secret: 5a54fd36fbfc4f33b2e6d1bdd2e74e27
       redirect_uri: http://localhost:8080/login/callback
-      scope: user-read-email playlist-read-private playlist-modify-private user-read-playback-state user-modify-playback-state
+      scope: user-read-email%20playlist-read-private%20playlist-modify-private%20user-read-playback-state%20user-modify-playback-state
 
 ---
 grails:

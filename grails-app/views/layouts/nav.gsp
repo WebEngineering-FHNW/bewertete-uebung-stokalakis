@@ -19,8 +19,7 @@
 	<div class="bg-overlay"></div>
 
 	<!-- Navigation starts here and is implemented by each .gsp file -->
-	<nav class="navbar navbar-default navbar-fixed-top"
-		style="opacity: 0.8">
+	<nav class="navbar navbar-default navbar-fixed-top transparent">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand">MusiQ App</a>

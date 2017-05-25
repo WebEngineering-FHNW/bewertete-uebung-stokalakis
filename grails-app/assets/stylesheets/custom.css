@@ -8,6 +8,10 @@ body {
 
 }
 
+.transparent {
+	opacity: 0.85;
+}
+
 /* overlay for the background picture */
 .bg-overlay {
     background: url("../images/overlay.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -16,7 +20,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 0;
+    z-index: -1;
 }
 
 /* provide fixed width for labels */
@@ -62,7 +66,6 @@ body {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
-  opacity: 0.8;
 }
 
 .jumbotron .btn {

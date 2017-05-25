@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="layout" content="nav" />
 <title>MusiQ App</title>
@@ -13,14 +12,13 @@
 </head>
 <body>
 	<div class="container">
-		
+
 		<!-- Search starts here -->
-		<div class="jumbotron">
+		<div class="jumbotron transparent">
 			<p class="lead">Search a song you'd like to add to the playlist.</p>
 			<form action="/search/index/${id}" method="post">
 				<div class="input-group-lg">
-					<label for="partyID" class="sr-only">Party-ID</label> <input
-						type="text" name="search" class="form-control"
+					<input type="text" name="search" class="form-control"
 						placeholder="Song, Artist or Album" required autofocus> <br />
 					<button type="submit" class="btn btn-success btn-lg"
 						aria-label="Left Align">
@@ -30,29 +28,32 @@
 			</form>
 		</div>
 		<!-- Search ends here -->
-		
+
 		<!-- Search resultset starts here, if resultset is not empty -->
 		<g:if test="${searchSong}">
-			<ul class="media-list">
-				<g:each var="song" in="${searchSong.tracks.items}">
-					<li class="media">
-						<div class="media-left">
-							<img class="media-object" src="${song.album.images[2].url}">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">${song.name}</h4>
-							<p>${song.artists[0].name} - ${song.album.name}</p>
-						</div>
-						<div class="media-right">
-							<a
-								href="/playlist/addSong/${id}?song=${song.id}&publicID=${party.publicID}"
-								class="btn btn-success btn-lg"> <span
-								class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-							</a>
-						</div>
-					</li>
-				</g:each>
-			</ul>
+			<div class="well transparent">
+				<ul class="media-list">
+					<g:each var="song" in="${searchSong.tracks.items}">
+						<li class="media">
+							<div class="media-left">
+								<img class="media-object" alt="album-cover"
+									src="${song.album.images[2].url}">
+							</div>
+							<div class="media-body">
+								<h4 class="media-heading">${song.name}</h4>
+								<p>${song.artists[0].name} - ${song.album.name}</p>
+							</div>
+							<div class="media-right">
+								<a
+									href="/playlist/addSong/${id}?song=${song.id}&publicID=${party.publicID}"
+									class="btn btn-success btn-lg"> <span
+									class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								</a>
+							</div>
+						</li>
+					</g:each>
+				</ul>
+			</div>
 		</g:if>
 		<!-- Search resultset ends here -->
 	</div>

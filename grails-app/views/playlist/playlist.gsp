@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="layout" content="nav" />
 <META HTTP-EQUIV="refresh" CONTENT="15">
@@ -14,9 +13,10 @@
 </head>
 <body>
 	<div class="container">
-		<div class="jumbotron">
+		<div class="jumbotron transparent">
 
 			<!--  Information about your party starts here -->
+			<!--  Invalid HTML: Headers (h3 & h4) are needed by Bootrstrap to steer size; but actually header tags are not allowed before a div -->
 			<div class="row text-left">
 				<h3>
 					<div class="col-md-6">
@@ -98,30 +98,33 @@
 				</a>
 			</g:else>
 		</div>
+
 		<!-- Playlist is created here; page refreshes every 15s to show newly added songs -->
-		<div class="jumbotron">
-			<ul class="media-list">
-				<g:each var="song" in="${party.songs}">
-					<li class="media" style="padding-left: 15px;">
-						<div class="media-left">
-							<img class="media-object" src="${song.image}">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">${song.name}</h4>
-							<p>${song.artist} - ${song.album}</p>
-						</div> <g:if test="${admin}">
-							<div class="media-right">
-								<a
-									href="/playlist/delete/${party.adminID}?songID=${song.songID}"
-									class="btn btn-success btn-lg"> <span
-									class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-								</a>
+		<g:if test="${party.songs.size() > 0}">
+			<div class="well transparent">
+				<ul class="media-list">
+					<g:each var="song" in="${party.songs}">
+						<li class="media" style="padding-left: 15px;">
+							<div class="media-left">
+								<img class="media-object" alt="album-cover" src="${song.image}">
 							</div>
-						</g:if>
-					</li>
-				</g:each>
-			</ul>
-		</div>
+							<div class="media-body">
+								<h4 class="media-heading">${song.name}</h4>
+								<p>${song.artist} - ${song.album}</p>
+							</div> <g:if test="${admin}">
+								<div class="media-right">
+									<a
+										href="/playlist/delete/${party.adminID}?songID=${song.songID}"
+										class="btn btn-success btn-lg"> <span
+										class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									</a>
+								</div>
+							</g:if>
+						</li>
+					</g:each>
+				</ul>
+			</div>
+		</g:if>
 	</div>
 </body>
 </html>
