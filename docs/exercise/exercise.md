@@ -47,7 +47,7 @@ even if the more difficult parts take longer than expected.
 
 How to start the project: (if other than `grailsw run-app`)
 
-How to test the project:  (if other than `grailsw test-app`)
+How to test the project:  [No tests written so far. Will add them later to my ongoing project.]
 
 Project description:      /description [as .gsp file]
 
