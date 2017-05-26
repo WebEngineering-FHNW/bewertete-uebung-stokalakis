@@ -51,7 +51,7 @@ How to test the project:  [No tests written so far. Will add them later to my on
 
 Project description:      index.html (CSS included)
 
-External contributions:	  [Marked as EXTERNAL within the code. Occurence: 1x]
+External contributions:	  [Marked as EXTERNAL within the code. Occurence: 2x]
 
 Other comments: 		  If possible, live demonstration is recommendable to show interaction with Spotify.
 

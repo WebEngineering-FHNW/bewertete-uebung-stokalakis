@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <title>Project description (HTML only)</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="stylesheet"
          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -13,10 +13,11 @@
          body {
          padding-top: 70px;
          }
+         .center {
+         text-align: center;
+         }
          /* standard jumbotron css starts here (only few changes have been made) */
-         .header,
-         .marketing,
-         .footer {
+         .header, .marketing, .footer {
          padding-right: 15px;
          padding-left: 15px;
          }
@@ -34,12 +35,12 @@
          color: #777;
          border-top: 1px solid #e5e5e5;
          }
-         @media (min-width: 768px) {
+         @media ( min-width : 768px) {
          .container {
          max-width: 730px;
          }
          }
-         .container-narrow > hr {
+         .container-narrow>hr {
          margin: 30px 0;
          }
          .jumbotron {
@@ -53,13 +54,11 @@
          .marketing {
          margin: 40px 0;
          }
-         .marketing p + h4 {
+         .marketing p+h4 {
          margin-top: 28px;
          }
          @media screen and (min-width: 768px) {
-         .header,
-         .marketing,
-         .footer {
+         .header, .marketing, .footer {
          padding-right: 0;
          padding-left: 0;
          }
@@ -87,15 +86,16 @@
          </div>
       </nav>
       <div class="container-fluid">
-         <!-- Project description starts here; same content as the initial commit proposal -->
+         <!-- Project description starts here; almost same content as the initial commit proposal -->
          <div class="container">
             <div class="jumbotron">
                <h1>About MusiQ App</h1>
                <p class="lead">The MusiQ App allows you to create and
-                  administrate a playlist if you have a Spotify Premium Account. Share
-                  the ID with your friends and allow them to search and add tracks to
-                  your playlist. As admin, you have the full control over the playlist
-                  and you can stop the playback and skip or delete certain songs.
+                  administrate a playlist if you have a Spotify Premium Account.
+                  Share the ID with your friends and allow them to search and add
+                  tracks to your playlist. As admin, you have the full control over
+                  the playlist and you can stop the playback and skip or delete
+                  certain songs.
                </p>
             </div>
             <div class="well">
@@ -118,14 +118,14 @@
                         is able to create and modify playlists via the Spotify Web API.
                         The playlist itself stays with Spotify. The master device is the
                         only device which is connected with the audio device (eg. UE
-                        BOOM).<br> A client-usergroup is assigned to a master-account
-                        and connects to the webserver. The client-usergroup is able to
-                        search for music titles and add them to a playlist ("Queue").<br>
-                        The master account always has the full control over the
-                        playlist(s) ("Queues") and is able to add, remove and modify
-                        active clients and music titles.<br> A nice to have feature
-                        is a poll functionality to allow the clients to vote for certain
-                        music titles, genres, singers.
+                        BOOM).<br> A client-usergroup is assigned to a
+                        master-account and connects to the webserver. The
+                        client-usergroup is able to search for music titles and add them
+                        to a playlist ("Queue").<br> The master account always has
+                        the full control over the playlist(s) ("Queues") and is able to
+                        add, remove and modify active clients and music titles.<br>
+                        A nice to have feature is a poll functionality to allow the
+                        clients to vote for certain music titles, genres, singers.
                      </p>
                   </div>
                   <div class="col-lg-6">
@@ -133,13 +133,14 @@
                      <p>The bigger idea behind this is to be able to use a MusiQ
                         account for several streaming services (Youtube, Apple Music etc)
                         - and not being bound to Spotify; or even stream your own local
-                        stored music to a master device, whereat an internet connection is
-                        not needed at all (master device itself acts then as a webserver).
+                        stored music to a master device, whereat an internet connection
+                        is not needed at all (master device itself acts then as a
+                        webserver).
                      </p>
                      <h4>Update, 10.05.2017</h4>
                      <p>New idea: User does not need an MusiQ account - it's enough
-                        to know the unique public ID of the playlist to add a song ("login
-                        screen": Name and ID)
+                        to know the unique public ID of the playlist to add a song
+                        ("login screen": Name and ID)
                      </p>
                      <h4>TODOs</h4>
                      <p>
@@ -156,11 +157,58 @@
                      </p>
                   </div>
                </div>
+               
+               <!-- EXTERNAL: https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_slideshow_rr -->
+               <div class="w3-content w3-section center">
+                  <img class="mySlides"
+                     src="docs/exercise/printscreens/0_welcome.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides" src="docs/exercise/printscreens/0b_welcome.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides" src="docs/exercise/printscreens/1_create.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides"
+                     src="docs/exercise/printscreens/2_admin_view_1.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides"
+                     src="docs/exercise/printscreens/3_admin_view_2.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides"
+                     src="docs/exercise/printscreens/4_search_result.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides"
+                     src="docs/exercise/printscreens/5_public_view.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides"
+                     src="docs/exercise/printscreens/6_error_screen.png"
+                     style="width: 650px; height: 450px" alt=""> <img
+                     class="mySlides"
+                     src="docs/exercise/printscreens/7_description.png"
+                     style="width: 650px; height: 450px" alt="">
+               </div>
             </div>
             <footer class="footer">
                <p>&copy; 2017 Tokalakis, Samuel</p>
             </footer>
          </div>
       </div>
+      <script>
+         var slideIndex = 0;
+         carousel();
+         
+         function carousel() {
+         	var i;
+         	var x = document.getElementsByClassName("mySlides");
+         	for (i = 0; i < x.length; i++) {
+         		x[i].style.display = "none";
+         	}
+         	slideIndex++;
+         	if (slideIndex > x.length) {
+         		slideIndex = 1
+         	}
+         	x[slideIndex - 1].style.display = "block";
+         	setTimeout(carousel, 4000); // Change image every 4 seconds
+         }
+      </script>
    </body>
 </html>
