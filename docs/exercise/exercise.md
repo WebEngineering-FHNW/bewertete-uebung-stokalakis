@@ -49,7 +49,7 @@ How to start the project: (if other than `grailsw run-app`)
 
 How to test the project:  [No tests written so far. Will add them later to my ongoing project.]
 
-Project description:      /description [as .gsp file]
+Project description:      index.html (CSS included)
 
 External contributions:	  [Marked as EXTERNAL within the code. Occurence: 1x]
 
