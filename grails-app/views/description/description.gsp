@@ -70,7 +70,7 @@
                      results<br> - (Optional) Copy to clipboard button<br>-
                      (Optional) When deleting a song which appears twice in the same
                      playlist, it deletes the first one, regardless of which song you
-                     choose
+                     choose<br>- Clean up: Delete getUser method call where not needed
                   </p>
                </div>
             </div>
