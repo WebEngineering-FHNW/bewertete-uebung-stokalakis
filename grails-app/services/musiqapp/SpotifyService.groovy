@@ -214,9 +214,8 @@ class SpotifyService {
 	// ### Defining search services ###
 	
 	// search the spotify library with the provided query, type and limit
-	def searchSong(def query, def type, def limit) {
-		
-		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=' + type + '&limit=' + limit)
+	def searchSong(def token, def query, def type, def limit) {
+		def searchSong = rest.get('https://api.spotify.com/v1/search?q=' + query + '&type=' + type + '&limit=' + limit + '&access_token=' + token)
 		if(searchSong.status >= 400){ 
         	throw new Exception("Service call failed with error " + searchSong.status)
         }

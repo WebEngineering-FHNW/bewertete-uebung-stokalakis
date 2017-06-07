@@ -11,3 +11,7 @@ bin/*
 .classpath
 settings.gradle
 bewertete-uebung-stokalakis-neue_version/
+gradle.properties
+gradle.properties
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties

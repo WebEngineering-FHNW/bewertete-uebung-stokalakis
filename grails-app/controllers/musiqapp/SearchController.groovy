@@ -27,7 +27,7 @@ class SearchController {
 		// search service is only called if string is not empty
 		try {
 			if(search) {
-				searchSong = spotifyService.searchSong(search, type, limit)
+				searchSong = spotifyService.searchSong(party.token, search, type, limit)
 			}
 		} catch (Exception e) {
 			throw new Exception("Search is not working. Details: " + e)
