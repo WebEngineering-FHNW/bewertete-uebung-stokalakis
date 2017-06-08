@@ -70,7 +70,7 @@ they almost fade in the presence of the spotify service that is nicely
 injected into the Web MVC cycle.
 
 Engingeering:
-- full commit log (btw: who is "trentDoom"?)
+- full commit log (btw: who is "trentDoom"?) [My old username; changed it after I've noticed that I'm actually a grown man and should use an "age-appropriate" nickname :)]
 - no tests
 - very nice commenting
 
