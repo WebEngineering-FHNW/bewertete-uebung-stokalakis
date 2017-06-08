@@ -1,4 +1,4 @@
-# WebEngineering Module, Graded Exercise
+ # WebEngineering Module, Graded Exercise
 
 ## Commit Proposal
 
@@ -60,4 +60,28 @@ I'm particular proud of:  Complex O-AUTH 2.0 verification (https://developer.spo
 
 ## Project grading 
 
-< to be filled by lecturer>
+Index.html given and fully valid html.
+
+The application works fine.
+
+Functionality is a social music-sharing app with shared playlist and 
+live streaming. While the typical web-applications features are included,
+they almost fade in the presence of the spotify service that is nicely
+injected into the Web MVC cycle.
+
+Engingeering:
+- full commit log (btw: who is "trentDoom"?)
+- no tests
+- very nice commenting
+
+Many extra points are awarded for the technical challenge and the extra effort
+that comes with integrating an external service and creating such a nice
+application.
+
+Congratulations!
+While this application builds on the topics that we have covered in the module,
+it obviously goes far beyond and demonstrates your ability to extend your
+skills and knowledge by yourself and your proficiency in creating
+real-life, professional-grade applications.
+
+Grade: 6.0
